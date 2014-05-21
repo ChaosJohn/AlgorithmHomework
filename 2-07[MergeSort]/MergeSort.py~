@@ -1,0 +1,54 @@
+#!/usr/bin/pyhton
+# Filename: MergeSort.py
+
+import random
+
+A = [random.randint(1,1000) for i in range(0, 100)]
+
+for i in range (0, 100): 
+	print i, A[i]
+
+MergeSort(A, 0, len(A) - 1)
+
+for i in range (0, 100):
+	print i, A[i]
+
+def MergeSort(A, left, right):
+	if left < right:
+		i = (left + right) / 2
+		MergeSort(A, left, i)
+		MergeSort(A, i + 1, right)
+		Merge(A, left, i, right)
+
+def Copy(new, old, left, right):
+	for i in range(0, left - right + 1):
+		new[i] = old[left + i]
+
+def Merge(A, left, i, right):
+	Copy(AL, A, left, i)
+	Copy(AR, A, i + 1, right)
+	AL[len(AL)] = AR[len(AR)] = 0
+	Lindex = Rindex = Aindex = 0
+	while true:
+		if AL[Lindex] == 0:
+			for j in range(Rindex, len(AR)):
+				A[Aindex] = AR[j]
+				Aindex += 1
+				break
+		elif AR[Rindex] == 0:
+		  	for k in range(Lindex, len(AL)):
+				A[Aindex] = AL[k]
+				Aindex += 1
+				break
+		elif AL[Lindex] < AR[Rindex]:
+		  	A[Aindex] = AL[Lindex]
+		  	Aindex += 1
+		  	Lindex += 1
+		  	continue
+		elif AL[Lindex] > AR[Rindex]:
+		  	A[Aindex] = AR[Rindex]
+		  	Aindex += 1
+		  	Rindex += 1
+		  	continue
+		else: 
+		  	pass
